@@ -29,8 +29,22 @@ class Warehouse
       @y -= 1
       @board[@y][@x] = "X"
     elsif direction == "E"
-      @board[9][0] = "-"
-      @board[9][1] = "X"
+      @board[@y][@x] = "-"
+      @x += 1
+      @board[@y][@x] = "X"
+    elsif direction == "S"
+      raise WarehouseRobot::OutOfBoundsError if @y + 1 >= @board.length
+      @board[@y][@x] = "-"
+      @y += 1
+      @board[@y][@x] = "X"
+    elsif direction == "W"
+      @board[@y][@x] = "-"
+      @x -= 1
+      @board[@y][@x] = "X"
     end
   end
+end
+
+module WarehouseRobot
+  class OutOfBoundsError < StandardError; end
 end
